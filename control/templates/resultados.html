@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% load static %} 
+
+{% block title %}
+    Listado de Registro
+{% endblock title %}
+
+{% block content %}
+<div class="container py-4">
+  <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'Control:listado' %}">Listado</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Resultado</li>
+      </ol>
+  </nav>
+  <br>
+
+  <div class="row">
+      <div class="col">
+          <h1>Listado</h1>
+          <hr>
+      </div>
+  </div>
+  <br>
+  <div class="row">
+      <div class="col">
+          <div class="card">
+              <div class="card-body">
+                  <form action="/control/filtrado/">
+                      <div class="row">
+                          <div class="col mb-3">
+                              <label for="pedido" class="form-label">Pedido</label>
+                              <input id="pedido" type="text" class="form-control" name="pedido">
+                          </div>
+                          <div class="col mb-3">
+                              <label for="codigo" class="form-label">código</label>
+                              <input id="codigo" type="number" class="form-control" name="codigo">
+                          </div>
+                          <div class="col mb-3">
+                              <label for="fecha" class="form-label">Fecha Compra</label>
+                              <input id="fecha" type="date" class="form-control" name="fecha">
+                          </div>    
+                      </div>
+                      <div class="row">                         
+                          <div class="col mb-3">
+                              <label for="entrega_fecha" class="form-label">Fecha Entrega</label>
+                              <input id="entrega_fecha" type="date" class="form-control" name="entrega_fecha">
+                          </div>             
+                          <div class="col mb-3"></div>
+                      </div>
+                      <div class="row">
+                          <div class="col">
+                              <div class="d-flex justify-content-end">
+                                  <button type="submit" class="btn btn-primary">
+                                      Filtrar
+                                  </button>
+                              </div>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+  <table class="table table-sm">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Pedido</th>
+          <th scope="col">Código</th>
+          <th scope="col">Municipio</th>
+          <th scope="col">Partes y Pieza</th>
+          <th scope="col">Tipo Venta</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">O.Trabajo</th>
+          <th scope="col">Entregado</th>
+          <th scope="col">Recibido</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for registro in registros %}
+      <tr>
+          <th scope="row">{{registro.id}}</th>
+          <td>{{registro.pedido}}</td>
+          <td>{{registro.pieza.codigo}}</td>
+          <td>{{registro.municipio}}</td>
+          <td>{{registro.pieza}}</td>
+          <td>{{registro.tipo}}</td>
+          <td>{{registro.cantidad}}</td>
+          <td>{{registro.orden_trabajo}}</td>
+          <td>{{registro.entregado}}</td>
+          <td>{{registro.recibe}}</td>
+          <td> <a class="btn btn-secondary" href="{% url 'Control:detalles' registro.id %}" role="button">Detalles</a></td>
+          <td> <a class="btn btn-success" href="{% url 'Control:update' registro.id %}"  role="button">Editar</a></td>
+          <td> <a class="btn btn-danger" href="{% url 'Control:delete' registro.id %}" role="button">Eliminar</a></td>    
+      {% endfor %}
+      </tbody>
+  </table>
+</div>          
+{% endblock content %}

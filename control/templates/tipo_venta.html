@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Municipio
+{% endblock title %}
+
+
+{% block content %}
+<div class="container py-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Tipo de Ventas</li>
+        </ol>
+    </nav>
+    <br>
+</div>
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <form class="card p-5" method="post">
+            {% csrf_token %}Tipos de Ventas</h1>
+            <hr>
+            <div class="mb-3">
+                <label for='{{ form.nombre.id_for_label }}' class="form-label">Tipos de ventas por comercio electrónico:</label>
+                {{form.tipo}}
+            </div>  
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">Agregar</button>
+            </div>
+        </form>
+    </div>
+</div>  
+{% endblock content %}
+    

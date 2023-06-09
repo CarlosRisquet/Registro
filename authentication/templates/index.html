@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+   Inicio 
+{% endblock title %}
+
+
+{% block content %}
+<div class="row pb-4">
+   <div class="col-md-4">
+      <div class="card py-3 text-center">
+         <a href="{% url 'Control:registro_pieza' %}"><img src="{% static 'assets/dist/img/iconos/piezas.png' %}"
+            style="width: 200px; height:200px;"></a>
+           <h3>Registro de Piezas</h3>
+      </div>
+   </div>
+   <div class="col-md-4">
+      <div class="card py-3 text-center">
+         <a href="{% url 'Control:municipio' %}"><img src="{% static 'assets/dist/img/iconos/piezas.png' %}"
+            style="width: 200px; height:200px;"></a>
+            <h3>Municipio</h3>
+      </div>
+   </div>
+   <div class="col-md-4">
+      <div class="card py-3 text-center">
+         <a href="{% url 'Control:tipo_venta' %}"><img src="{% static 'assets/dist/img/iconos/piezas.png' %}"
+            style="width: 200px; height:200px;"></a>
+            <h3>Tipos de Ventas</h3>
+      </div>
+   </div>
+   <div class="col-md-4" style="margin-top: 15px;">
+      <div class="card py-3 text-center">
+         <a href="{% url 'Control:registro' %}"><img src="{% static 'assets/dist/img/iconos/piezas.png' %}"
+                  style="width: 200px; height:200px;"></a>
+          <h3>Registros</h3>
+      </div>
+   </div>
+   <div class="col-md-4">
+      <div class="card py-3 text-center" style="margin-top: 15px;">
+         <a href="{% url 'Control:listado' %}"><img src="{% static 'assets/dist/img/iconos/list.png' %}"
+                  style="width: 200px; height:200px;"></a>
+         <h3>Listado</h3>
+      </div>
+   </div>
+{% endblock content %}
+    
+    

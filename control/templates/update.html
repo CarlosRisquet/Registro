@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Actualizar Pedido
+{% endblock title %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <form class="card p-5" method="post">
+            {% csrf_token %}
+            <h1 style="text-align: center;">Registros</h1>
+            <hr>
+            <div class="mb-3">
+                <label for='{{ form.nombre.id_for_label }}' class="form-label">Pedido</label>
+                {{form.pedido}}
+            </div>
+            <div class="col mb-3">
+                <label for="fecha_compra" class="form-label">Fecha de Compra</label>
+                <input id="fecha_compra" type="date" class="form-control" name="fecha_compra">
+            </div> 
+            <div class="mb-3">
+                <label for='{{ form.nombre.id_for_label }}' class="form-label">Municipio</label>
+                {{form.municipio}}
+            </div>
+            <div class="mb-3">
+                <label for='{{ form.nombre.id_for_label }}' class="form-label">Código</label>
+                {{form.codigo}}
+            </div>
+            <div class="mb-3">
+                <label for='{{ form.nombre.id_for_label }}' class="form-label">Partes y Piezas</label>
+                {{form.pieza}}
+            </div> 
+            <div class="mb-3">
+                <label for='{{ form.nombre.id_for_label }}' class="form-label">Tipos de Ventas</label>
+                {{form.tipo}}
+            </div> 
+            <div class="mb-3">
+                <label for='{{ form.nombre.id_for_label }}' class="form-label">Cantidad</label>
+                {{form.cantidad}}
+            </div> 
+            <div class="mb-3">
+                <label for='{{ form.nombre.id_for_label }}' class="form-label">Precio Tienda</label>
+                {{form.precio_tienda}}
+            </div> 
+            <div class="mb-3">
+                <label for='{{ form.nombre.id_for_label }}' class="form-label">Importe Factura</label>
+                {{form.import_fact}}
+            </div> 
+            <div class="mb-3">
+                <label for='{{ form.nombre.id_for_label }}' class="form-label">Orden de Trabajo</label>
+                {{form.orden_trabajo}}
+            </div> 
+            <div class="mb-3">
+                <label for='{{ form.nombre.id_for_label }}' class="form-label">Pre-Factura</label>
+                {{form.pre_fact}}
+            </div>             
+            <div class="mb-3">
+            <div class="mb-3">
+                <label for='{{ form.nombre.id_for_label }}' class="form-label">Factura</label>
+                {{form.fact}}
+            </div>             
+            <div class="mb-3">
+                <label for='{{ form.nombre.id_for_label }}' class="form-label">Entregado a:</label>
+                {{form.entregado}}
+            </div>
+            <div class="mb-3">
+                <label for='{{ form.nombre.id_for_label }}' class="form-label">Recibido por:</label>
+                {{form.recibe}}
+            </div>
+            <div class="col mb-3">
+                <label for="fecha" class="form-label">Fecha</label>
+                <input id="fecha" type="date" class="form-control" name="fecha">
+            </div> 
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">Actualizar</button>
+            </div>
+        </form>
+    </div>
+</div>    
+{% endblock content %}

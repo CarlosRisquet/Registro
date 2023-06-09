@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Eliminar Registro
+{% endblock title %}
+ 
+{% block content %}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form class="card p-5" method="post">
+                <h1>Eliminar Registro</h1>
+                <hr>
+                {% csrf_token %}
+                <div class="mb-4">              
+                    <p style="font-size: 21px;">
+                        <b>¿Está seguro de que desea eliminar este registro?</b>
+                    </p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <a href="{% url 'Control:listado' %}" class="me-1">Volver a la Lista de Registro</a>
+                    <button type="submit" class="btn btn-danger">
+                        Eliminar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

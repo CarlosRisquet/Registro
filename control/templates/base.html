@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'assets/dist/css/bootstrap.min.css' %}" rel=" stylesheet ">
+    <link href="{% static 'assets/dist/css/all.css' %}" rel=" stylesheet ">
+    <link href="{% static 'assets/dist/css/custom.css' %}" rel=" stylesheet ">
+    <link href="{% static 'assets/dist/css/datatables.min.css' %}" rel=" stylesheet ">
+    <title>
+        {% block title %}
+        {% endblock title %}
+    </title>
+</head>
+{% include 'includes/navbar.html'%}
+
+<body>
+    <div class="py-5">
+        <div class="container">
+            {% block content %} {% endblock content %}
+        </div>
+    </div>
+</body>
+
+{% include 'includes/footer.html'%}
+<script src="{% static 'assets/dist/js/popper.min.js' %}"></script>
+<script src="{% static 'assets/dist/js/jquery.min.js' %}"></script>
+<script src="{% static 'assets/dist/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/dist/js/datatables.min.js' %}"></script>
+<script>
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    
+    $(document).ready(function () {
+        var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+        var toastList = toastElList.map(function (toastEl) {
+            return new bootstrap.Toast(toastEl)
+        });
+        toastList.forEach(toast => toast.show()); // This show them
+    })
+</script>
+{% block script %}
+{% endblock script %}
+
+</html>

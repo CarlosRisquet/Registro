@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Iniciar sesion
+{% endblock title %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form class="card p-5" action="/login/" method="post">
+                <h1>Iniciar sesion</h1>
+                <hr>
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="id_username">Usuario</label>
+                    <input id="id_username" type="username" class="form-control" name="username">
+                </div>
+                
+                <div class="mb-4">
+                    <label for="id_password">Contraseña</label>
+                    <div class="input-group">
+                        <input id="id_password" type="password" class="form-control" name="password">
+                        <span class="input-group-text" onclick="showHidePassword()">
+                            <i class="fa-solid fa-eye" id="eye-icon"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                </div>
+            </form>
+            <br>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showHidePassword() {
+        let passwordInput = document.getElementById("id_password");
+        let eyeIcon = document.getElementById("eye-icon");
+        if (eyeIcon.classList.contains("fa-eye")) {
+            passwordInput.type = "text";
+            eyeIcon.classList.remove("fa-eye");
+            eyeIcon.classList.add("fa-eye-slash");
+        }
+        else {
+            passwordInput.type = "password";
+            eyeIcon.classList.remove("fa-eye-slash");
+            eyeIcon.classList.add("fa-eye");
+        }
+    }
+</script>
+{% endblock content %}

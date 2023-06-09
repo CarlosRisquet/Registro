@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% load static %} 
+
+{% block title %}
+    Detalles
+{% endblock title %}
+
+{% block content %}
+<table class="table table-sm">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Descuento Pasarela</th>
+        <th scope="col">Precio Tienda</th>
+        <th scope="col">Importe Tienda</th>
+        <th scope="col">Importe Factura</th>
+        <th scope="col">Total a Pagar</th>
+        <th scope="col">Pre-Factura</th>
+        <th scope="col">Factura</th>
+        <th scope="col">Fecha Compra</th>
+        <th scope="col">Fecha Entrega</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row">{{registros.id}}</th>
+        <td>{{registros.descuento_pasarela}}</td>
+        <td>{{registros.precio_tienda}}</td>
+        <td>{{registros.importe_tienda}}</td>
+        <td>{{registros.import_fact}}</td>
+        <td>{{registros.total_pagar}}</td>
+        <td>{{registros.pre_fact}}</td>
+        <td>{{registros.fact}}</td>
+        <td>{{registros.fecha_compra}}</td>
+        <td>{{registros.fecha}}</td>
+        <td> <a class="btn btn-secondary" href="{% url 'Control:listado' %}" role="button">Volver a la lista</a></td>   
+    </tbody>
+</table>          
+{% endblock content %}
