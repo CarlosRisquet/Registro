@@ -60,7 +60,7 @@ class Producto(models.Model):
         verbose_name_plural = 'Productos' 
 
     def __str__(self):
-        return self.pieza
+        return self.articulo
 
     
     @property

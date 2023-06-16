@@ -13,6 +13,8 @@
     <thead>
       <tr>
         <th scope="col">Id</th>
+        <th scope="col">Código</th>
+        <th scope="col">Producto</th>
         <th scope="col">Descuento Pasarela</th>
         <th scope="col">Precio Tienda</th>
         <th scope="col">Importe Pasarela</th>
@@ -25,6 +27,8 @@
       {% for producto in productos %}
     <tr>
         <th scope="row">{{producto.id}}</th>
+        <td>{{producto.articulo.codigo}}</td>
+        <td>{{producto.articulo}}</td>
         <td>{{producto.descuento_pasarela}}</td>
         <td>{{producto.precio_tienda}}</td>
         <td>{{producto.importe_pasarela}}</td>

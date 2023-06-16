@@ -28,6 +28,6 @@ urlpatterns = [
     path('actualizar_pedido/<pk>',views.PedidoUpdate, name = 'update'),
     path('actualizar_producto/<pk>',views.ProductoUpdate, name= 'update_producto'),
     path('detalles/<pk>',views.detalles_pedidos, name = 'detalles_pedido'),
-    path('delete/<pk>',views.PedidoDeleteView.as_view(), name= 'delete')
-  #  path('filtrado/',views.filtrado, name= 'filtrado')
+    path('delete/<pk>',views.PedidoDeleteView.as_view(), name= 'delete'),
+    path('filtrado/',views.filtrado, name= 'filtrado')
 ]

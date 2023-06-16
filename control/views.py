@@ -46,6 +46,7 @@ def registro(request):
         form = PedidoForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.add_message(request, messages.SUCCESS, "El Pedido fué agregado satisfactoriamente.")
             return render(request,'index.html')
     else:
         form = PedidoForm()
@@ -92,7 +93,7 @@ def reg_producto (request):
             tipo_id = request.POST['tipo_id']
         )
         producto.save()
-        messages.add_message(request, messages.SUCCESS, "El Pedido fué agregado satisfactoriamente.")
+        messages.add_message(request, messages.SUCCESS, "El Producto fué agregado satisfactoriamente.")
     return redirect(f"/control/actualizar_pedido/{pedido.id}")
 
 def ProductoUpdate (request,pk):
@@ -151,26 +152,29 @@ class PedidoDeleteView(SuccessMessageMixin,DeleteView):
 #    template_name = "delete.html"
 #   success_url=reverse_lazy("Control:listado")
 
-#def filtrado(request):
-#    registro = Registro.objects.all()
-#    pieza = Pieza.objects.all()
-#    tipo = Tipo_Venta.objects.all()
-#    if ('pedido' in request.GET and request.GET ['pedido'] != ''):
-#        registros = registro.filter( pedido = request.GET ['pedido'])
-#    if ('codigo' in request.GET and request.GET ['codigo'] !=''):
-#        piezas = pieza.filter( codigo = request.GET ['codigo'])
-#        for pieza in piezas:
-#            registros = registro.filter(pieza_id = pieza.id)
-#    if ('fecha' in request.GET and request.GET ['fecha'] !=''):
-#        registros = registro.filter( fecha_compra = request.GET ['fecha'])
-#    if ('entrega_fecha' in request.GET and request.GET ['entrega_fecha'] !=''):
-#        registros = registro.filter( fecha = request.GET ['entrega_fecha'])
-#    if ('parte' in request.GET and request.GET ['parte'] !=''):
-#        piezas = pieza.filter( pieza = request.GET ['parte'])
-#        pieza = piezas[0]
-#        registros = registro.filter( pieza_id = pieza.id)
-#    if ('venta' in request.GET and request.GET ['venta'] !=''):
-#        tipos = tipo.filter(tipo = request.GET ['venta'] )
-#        tipo = tipos[0]
-#        registros = registro.filter(tipo_id = tipo.id)
-#  return render(request,'resultados.html',{ 'registros': registros }) 
+def filtrado(request):
+    pedidos = Pedido.objects.all()
+    articulo = Articulo.objects.all()
+    producto = Producto.objects.all()
+    tipo = Tipo_Venta.objects.all()
+    if ('pedido' in request.GET and request.GET ['pedido'] != ''):
+        pedidos = pedidos.filter( numero = request.GET ['pedido'])
+    if ('codigo' in request.GET and request.GET ['codigo'] !=''):
+        articulo1 = articulo.filter( codigo = request.GET ['codigo'])
+        print(articulo1)
+        producto = producto.filter(articulo_id = articulo1.id)
+        print(producto)
+        pedidos = pedidos.filter(id = producto.pedido_id)
+    if ('fecha' in request.GET and request.GET ['fecha'] !=''):
+        registros = registro.filter( fecha_compra = request.GET ['fecha'])
+    if ('entrega_fecha' in request.GET and request.GET ['entrega_fecha'] !=''):
+        registros = registro.filter( fecha = request.GET ['entrega_fecha'])
+    if ('parte' in request.GET and request.GET ['parte'] !=''):
+        piezas = pieza.filter( pieza = request.GET ['parte'])
+        pieza = piezas[0]
+        registros = registro.filter( pieza_id = pieza.id)
+    if ('venta' in request.GET and request.GET ['venta'] !=''):
+        tipos = tipo.filter(tipo = request.GET ['venta'] )
+        tipo = tipos[0]
+        registros = registro.filter(tipo_id = tipo.id)
+    return render(request,'resultados.html',{ 'pedidos': pedidos }) 

@@ -6,8 +6,27 @@
    Inicio 
 {% endblock title %}
 
-
 {% block content %}
+{% if messages %}
+  {% for message in messages %}
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+        <div class="alert alert-success alert-dismissible" role="alert">
+    {% else %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+    {% endif %}
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %} 
+{% endif %}
+<div class="container py-4">
+   <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+       </ol>
+   </nav>
+   <br>
+</div>
 <div class="row pb-4">
    <div class="col-md-4">
       <div class="card py-3 text-center">
