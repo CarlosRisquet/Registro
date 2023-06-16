@@ -17,6 +17,15 @@
             <!-- Right Side Of Navbar -->      
             {% if user.is_authenticated %}
             <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" style="color: #00294f" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        REGISTROS
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" style="color: #00294f" href="{% url 'Control:municipio' %}">Municipio</a>
+                        <a class="dropdown-item" style="color: #00294f" href="{% url 'Control:tipo_venta' %}">Tipos de Ventas</a>
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" style="color: #00294f" href="{% url 'Authentication:logout' %}">SALIR</a>
                 </li>

@@ -23,9 +23,11 @@ urlpatterns = [
     path('reg_municipio/',views.reg_municipio, name = 'municipio'),
     path('registro/',views.registro, name = 'registro'),
     path('listado/',views.listado, name = 'listado'),
-    path('detalles/<pk>',views.detalles, name = 'detalles'),
+    path('registro_productos/',views.reg_producto, name = 'registro_producto'),
     path('tipo_venta/',views.reg_tipo, name = 'tipo_venta'),
-    path('actualizar/<pk>',views.RegistroUpdateView.as_view(), name = 'update'),
-    path('delete/<pk>',views.RegistroDeleteView.as_view(), name= 'delete'),
-    path('filtrado/',views.filtrado, name= 'filtrado')
+    path('actualizar_pedido/<pk>',views.PedidoUpdate, name = 'update'),
+    path('actualizar_producto/<pk>',views.ProductoUpdate, name= 'update_producto'),
+    path('detalles/<pk>',views.detalles_pedidos, name = 'detalles_pedido'),
+    path('delete/<pk>',views.PedidoDeleteView.as_view(), name= 'delete')
+  #  path('filtrado/',views.filtrado, name= 'filtrado')
 ]

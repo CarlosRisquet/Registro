@@ -1,29 +1,73 @@
 from django import forms
-from .models import Registro,Pieza,Municipio, Tipo_Venta
+from .models import Pedido,Producto,Municipio, Tipo_Venta, Articulo
 
 
-class PiezaForm(forms.ModelForm):
-    """Form definition for Pieza."""
+class ProductoForm(forms.ModelForm):
+    """Form definition for Producto."""
 
     class Meta:
         """Meta definition for Piezaform."""
 
-        model = Pieza
-        fields = ('pieza','codigo')
+        model = Producto
+        fields = ('pedido','articulo','cantidad','tipo','precio_tienda','import_fact')
         widgets = {
-            'pieza': forms.TextInput(
+            'pedido': forms.TextInput(
             attrs= {
                 'class':'form-control'
             } 
             ),
-            'codigo':forms.TextInput(
+            'articulo':forms.TextInput(
                 attrs = {
                     'class':'form-control'
 
                 }
             ),
+            'cantidad': forms.TextInput(
+            attrs= {
+                'class':'form-control'
+            } 
+            ),
+            'tipo': forms.Select(
+            attrs= {
+                'class':'form-control'
+            } 
+            ),
+            'precio_tienda': forms.TextInput(
+            attrs= {
+                'class':'form-control'
+            } 
+            ),
+            'import_fact': forms.TextInput(
+            attrs= {
+                'class':'form-control'
+            } 
+            ),
 
         }
+
+class ArticuloForm(forms.ModelForm):
+    """Form definition for Arti."""
+
+    class Meta:
+        """Meta definition for Artiform."""
+
+        model = Articulo
+        fields = ('codigo','nombre')
+        widgets = {
+            'codigo': forms.TextInput(
+            attrs= {
+                'class':'form-control'
+            } 
+            ),
+            'nombre':forms.TextInput(
+                attrs = {
+                    'class':'form-control'
+
+                }
+            ),
+        }
+
+
 
 class MunicipioForm(forms.ModelForm):
     """Form definition for MODELNAME."""
@@ -60,22 +104,16 @@ class Tipo_VentaForm(forms.ModelForm):
            }
 
 
-class RegistroForm(forms.ModelForm):
+class PedidoForm(forms.ModelForm):
     """Form definition for MODELNAME."""
 
     class Meta:
         """Meta definition for MODELNAMEform."""
 
-        model = Registro
-        fields = ('pedido','fecha_compra','municipio','pieza','tipo','cantidad','precio_tienda','import_fact','orden_trabajo','pre_fact','fact','entregado','recibe','fecha')
+        model = Pedido
+        fields = ('numero','municipio','fecha_compra','orden_trabajo','pre_fact','fact','fecha','entregado','recibe')
         widgets = {
-            'pedido':forms.TextInput(
-                attrs = {
-                    'class':'form-control'
-
-                }
-            ),
-            'fecha_compra':forms.DateTimeInput(
+            'numero':forms.TextInput(
                 attrs = {
                     'class':'form-control'
 
@@ -87,31 +125,7 @@ class RegistroForm(forms.ModelForm):
 
                 }
             ),
-            'pieza':forms.Select(
-                attrs = {
-                    'class':'form-control'
-
-                }
-            ),
-            'tipo':forms.Select(
-                attrs = {
-                    'class':'form-control'
-
-                }
-            ),
-            'cantidad':forms.TextInput(
-                attrs = {
-                    'class':'form-control'
-
-                }
-            ),
-            'precio_tienda':forms.TextInput(
-                attrs = {
-                    'class':'form-control'
-
-                }
-            ),
-            'import_fact':forms.TextInput(
+            'fecha_compra':forms.DateTimeInput(
                 attrs = {
                     'class':'form-control'
 
@@ -137,6 +151,12 @@ class RegistroForm(forms.ModelForm):
 
                 }
             ),
+            'fecha':forms.DateTimeInput(
+                attrs = {
+                    'class':'form-control'
+
+                }
+            ),
             'entregado':forms.TextInput(
                 attrs = {
                     'class':'form-control'
@@ -148,11 +168,5 @@ class RegistroForm(forms.ModelForm):
                     'class':'form-control'
 
                 }
-            ),
-            'fecha':forms.DateTimeInput(
-                attrs = {
-                    'class':'form-control'
-
-                }
-            ),
+            )
         }

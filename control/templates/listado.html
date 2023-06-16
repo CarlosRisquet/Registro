@@ -7,6 +7,18 @@
 {% endblock title %}
 
 {% block content %}
+{% if messages %}
+  {% for message in messages %}
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+        <div class="alert alert-success alert-dismissible" role="alert">
+    {% else %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+    {% endif %}
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %} 
+{% endif %}
 <div class="container py-4">
   <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -75,12 +87,12 @@
         <tr>
           <th scope="col">Id</th>
           <th scope="col">Pedido</th>
-          <th scope="col">Código</th>
           <th scope="col">Municipio</th>
-          <th scope="col">Partes y Pieza</th>
-          <th scope="col">Tipos Ventas</th>
-          <th scope="col">Cantidad</th>
+          <th scope="col">Fecha Compra</th>
           <th scope="col">O.Trabajo</th>
+          <th scope="col">Pre_Factura</th>
+          <th scope="col">Factura</th>
+          <th scope="col">Fecha Entrega</th>
           <th scope="col">Entregado</th>
           <th scope="col">Recibido</th>
           <th scope="col"></th>
@@ -91,16 +103,16 @@
       {% for registro in registros %}
       <tr>
           <th scope="row">{{registro.id}}</th>
-          <td>{{registro.pedido}}</td>
-          <td>{{registro.pieza.codigo}}</td>
+          <td>{{registro.numero}}</td>
           <td>{{registro.municipio}}</td>
-          <td>{{registro.pieza}}</td>
-          <td>{{registro.tipo}}</td>
-          <td>{{registro.cantidad}}</td>
+          <td>{{registro.fecha_compra}}</td>
           <td>{{registro.orden_trabajo}}</td>
+          <td>{{registro.pre_fact}}</td>
+          <td>{{registro.fact}}</td>
+          <td>{{registro.fecha}}</td>
           <td>{{registro.entregado}}</td>
           <td>{{registro.recibe}}</td>
-          <td> <a class="btn btn-secondary" href="{% url 'Control:detalles' registro.id %}" role="button">Detalles</a></td>
+          <td> <a class="btn btn-secondary" href="{% url 'Control:detalles_pedido' registro.id%}" role="button">Detalles</a></td>
           <td> <a class="btn btn-success" href="{% url 'Control:update' registro.id %}"  role="button">Editar</a></td>
           <td> <a class="btn btn-danger" href="{% url 'Control:delete' registro.id %}" role="button">Eliminar</a></td>    
       {% endfor %}

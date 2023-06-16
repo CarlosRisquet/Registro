@@ -1,19 +1,6 @@
 from django.db import models
 
 # Create your models here.
-
-class Pieza(models.Model):
-    pieza = models.CharField(max_length=50)
-    codigo = models.CharField(max_length=15)
-
-
-    class Meta:
-        verbose_name = 'Pieza'
-        verbose_name_plural = 'Pieza' 
-
-    def __str__(self):
-        return self.pieza
-
 class Municipio(models.Model):
     municipio = models.CharField(max_length=50)
 
@@ -23,32 +10,58 @@ class Municipio(models.Model):
 
     def __str__(self):
         return self.municipio
+    
+
+class Articulo (models.Model):
+    codigo = models.CharField(max_length=15)
+    nombre = models.CharField(max_length=50)
+    def __str__(self):
+        return self.nombre
+    
+class Pedido(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    numero = models.CharField(max_length=15)
+    municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE)
+    fecha_compra = models.DateField(auto_now=False)
+    orden_trabajo = models.CharField(max_length=20)
+    pre_fact = models.CharField(default = '-',max_length=20)
+    fact = models.CharField(default = '-', max_length=20)
+    fecha = models.DateField(auto_now=False)
+    entregado = models.CharField(max_length=50)
+    recibe = models.CharField(max_length=50)
+
+    def __str__(self):
+        return {self.numero}
+
+    @property
+    def producto(self):
+        return Producto.objects.filter(pedido_id = self.id).first()
+
 
 class Tipo_Venta(models.Model):
     tipo = models.CharField("Tipo de Venta", max_length=50)
 
     def __str__(self):
         return self.tipo
+    
 
-class Registro(models.Model):
-    pedido = models.CharField(max_length=12)
-    fecha_compra = models.DateField(auto_now=False)
+
+class Producto(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
+    articulo = models.ForeignKey(Articulo, on_delete=models.CASCADE)
     cantidad = models.IntegerField()
-    pieza = models.ForeignKey(Pieza, on_delete=models.CASCADE)
     tipo = models.ForeignKey(Tipo_Venta, on_delete=models.CASCADE)
-    municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE)
-    orden_trabajo = models.CharField(max_length=20)
     precio_tienda = models.FloatField()
     import_fact = models.FloatField()
-    pre_fact = models.CharField(default = '-',max_length=20)
-    fact = models.CharField(default = '-', max_length=20)
-    entregado = models.CharField(max_length=50)
-    recibe = models.CharField(max_length=50)
-    fecha = models.DateField(auto_now=False)
 
-    @property
-    def fullname(self):
-        return self.nombre + ' ' + self.apellido_1 + ' ' + self.apellido_2
+    class Meta:
+        verbose_name = 'Producto'
+        verbose_name_plural = 'Productos' 
+
+    def __str__(self):
+        return self.pieza
+
     
     @property
     def importe_tienda(self):

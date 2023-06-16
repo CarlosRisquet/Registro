@@ -1,83 +1,288 @@
 {% extends 'base.html' %}
 
-
 {% block title %}
     Actualizar Pedido
-{% endblock title %}
-
+{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-6 offset-md-3">
-        <form class="card p-5" method="post">
-            {% csrf_token %}
-            <h1 style="text-align: center;">Registros</h1>
-            <hr>
-            <div class="mb-3">
-                <label for='{{ form.nombre.id_for_label }}' class="form-label">Pedido</label>
-                {{form.pedido}}
-            </div>
-            <div class="col mb-3">
-                <label for="fecha_compra" class="form-label">Fecha de Compra</label>
-                <input id="fecha_compra" type="date" class="form-control" name="fecha_compra">
-            </div> 
-            <div class="mb-3">
-                <label for='{{ form.nombre.id_for_label }}' class="form-label">Municipio</label>
-                {{form.municipio}}
-            </div>
-            <div class="mb-3">
-                <label for='{{ form.nombre.id_for_label }}' class="form-label">Código</label>
-                {{form.codigo}}
-            </div>
-            <div class="mb-3">
-                <label for='{{ form.nombre.id_for_label }}' class="form-label">Partes y Piezas</label>
-                {{form.pieza}}
-            </div> 
-            <div class="mb-3">
-                <label for='{{ form.nombre.id_for_label }}' class="form-label">Tipos de Ventas</label>
-                {{form.tipo}}
-            </div> 
-            <div class="mb-3">
-                <label for='{{ form.nombre.id_for_label }}' class="form-label">Cantidad</label>
-                {{form.cantidad}}
-            </div> 
-            <div class="mb-3">
-                <label for='{{ form.nombre.id_for_label }}' class="form-label">Precio Tienda</label>
-                {{form.precio_tienda}}
-            </div> 
-            <div class="mb-3">
-                <label for='{{ form.nombre.id_for_label }}' class="form-label">Importe Factura</label>
-                {{form.import_fact}}
-            </div> 
-            <div class="mb-3">
-                <label for='{{ form.nombre.id_for_label }}' class="form-label">Orden de Trabajo</label>
-                {{form.orden_trabajo}}
-            </div> 
-            <div class="mb-3">
-                <label for='{{ form.nombre.id_for_label }}' class="form-label">Pre-Factura</label>
-                {{form.pre_fact}}
-            </div>             
-            <div class="mb-3">
-            <div class="mb-3">
-                <label for='{{ form.nombre.id_for_label }}' class="form-label">Factura</label>
-                {{form.fact}}
-            </div>             
-            <div class="mb-3">
-                <label for='{{ form.nombre.id_for_label }}' class="form-label">Entregado a:</label>
-                {{form.entregado}}
-            </div>
-            <div class="mb-3">
-                <label for='{{ form.nombre.id_for_label }}' class="form-label">Recibido por:</label>
-                {{form.recibe}}
-            </div>
-            <div class="col mb-3">
-                <label for="fecha" class="form-label">Fecha</label>
-                <input id="fecha" type="date" class="form-control" name="fecha">
-            </div> 
-            <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary">Actualizar</button>
-            </div>
-        </form>
+{% if messages %}
+  {% for message in messages %}
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+        <div class="alert alert-success alert-dismissible" role="alert">
+    {% else %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+    {% endif %}
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-</div>    
-{% endblock content %}
+    {% endfor %} 
+{% endif %}
+<div class="container">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'Control:listado' %}">Listado</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Actualizar</li>
+        </ol>
+    </nav>
+</div>
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-6 {% if pedidos == None %} offset-md-3 {% endif %}">
+            <form class="card p-5" method="post">
+                {% csrf_token %}
+                <h1 style="text-align: center;">Registros</h1>
+                <hr>
+                <div class="mb-3">
+                    <label for='{{ form.nombre.id_for_label }}' class="form-label">Número de Pedido</label>
+                    {{form.numero}}
+                </div>
+                <div class="mb-3">
+                    <label for='{{ form.nombre.id_for_label }}' class="form-label">Municipio</label>
+                    {{form.municipio}}
+                </div>
+                <div class="col mb-3">
+                    <label for="fecha_compra" class="form-label">Fecha de Compra</label>
+                    <input id="fecha_compra" type="date" class="form-control" name="fecha_compra">
+                </div>  
+                <div class="mb-3">
+                    <label for='{{ form.nombre.id_for_label }}' class="form-label">Orden de Trabajo</label>
+                    {{form.orden_trabajo}}
+                </div>  
+                <div class="mb-3">
+                    <label for='{{ form.nombre.id_for_label }}' class="form-label">Pre-Factura</label>
+                    {{form.pre_fact}}
+                </div>             
+                <div class="mb-3">
+                    <label for='{{ form.nombre.id_for_label }}' class="form-label">Factura</label>
+                    {{form.fact}}
+                </div>
+                <div class="col mb-3">
+                    <label for="fecha" class="form-label">Fecha</label>
+                    <input id="fecha" type="date" class="form-control" name="fecha">
+                </div>              
+                <div class="mb-3">
+                    <label for='{{ form.nombre.id_for_label }}' class="form-label">Entregado a:</label>
+                    {{form.entregado}}
+                </div>
+                <div class="mb-3">
+                    <label for='{{ form.nombre.id_for_label }}' class="form-label">Recibido por:</label>
+                    {{form.recibe}}
+                </div>
+                <hr>
+                <div class="d-flex flex-wrap pt-4">
+                    <button type="button" class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#agregar">Agregar Productos</button>
+                    <button type="submit" class="btn btn-primary m-1">Actualizar</button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="agregar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Productos</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="post" action="/control/registro_productos/" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            {% csrf_token %}
+                            <input id="pedido_id" name="pedido_id" type="hidden" value="{{ pedidos.id }}">
+                            <div class="mb-3 row">
+                                <label for="articulo" class="col-sm-3 col-form-label">
+                                    Articulo
+                                </label>
+                                <div class="col-sm-9">
+                                    <select name="articulo" id="articulo" class="form-control">
+                                        
+                                        {% for articulo in articulos %}
+                                            <option value="{{articulo.id}}">{{articulo.nombre}}</option> 
+                                        {% endfor %}
+                                            
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="nombre" class="col-sm-3 col-form-label">
+                                    Tipos de Ventas
+                                </label>
+                                <div class="col-sm-9">
+                                    <select name="tipo_id" id="tipo_id" class="form-control">
+                                        
+                                        {% for tipo in tipos %}
+                                            <option value="{{tipo.id}}">{{tipo.tipo}}</option> 
+                                        {% endfor %}
+                                            
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="cantidad" class="col-sm-3 col-form-label">
+                                    Cantidad
+                                </label>
+                                <div class="col-sm-9">
+                                    <input id="cantidad" name="cantidad" type="text" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="precio_tienda" class="col-sm-3 col-form-label">
+                                    Precio Tienda
+                                </label>
+                                <div class="col-sm-9">
+                                    <input id="precio_tienda" name="precio_tienda" type="text" inputmode="decimal" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="import_fact" class="col-sm-3 col-form-label">
+                                    Importe Factura
+                                </label>
+                                <div class="col-sm-9">
+                                    <input id="import_fact" name="import_fact" type="text" inputmode="decimal" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Agregar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {% if pedidos != None %}
+        <div class="col-md-6" style="height: 70vh; overflow-y: scroll;">
+            <h1 style="text-align: center;">Productos</h1>
+            <hr>
+            <form method="post" action="/control/registro_productos/" enctype="multipart/form-data">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <input id="pedido_id" name="pedido_id" type="hidden" value="{{ pedidos.id }}">
+                    <div class="mb-3 row">
+                        <label for="articulo" class="col-sm-3 col-form-label">
+                            Articulo
+                        </label>
+                        <div class="col-sm-9">
+                            <select name="articulo" id="articulo" class="form-control">
+                                
+                                {% for articulo in articulos %}
+                                    <option value="{{articulo.id}}">{{articulo.nombre}}</option> 
+                                {% endfor %}
+                                    
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="nombre" class="col-sm-3 col-form-label">
+                            Tipos de Ventas
+                        </label>
+                        <div class="col-sm-9">
+                            <select name="tipo_id" id="tipo_id" class="form-control">
+                                
+                                {% for tipo in tipos %}
+                                    <option value="{{tipo.id}}">{{tipo.tipo}}</option> 
+                                {% endfor %}
+                                    
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="cantidad" class="col-sm-3 col-form-label">
+                            Cantidad
+                        </label>
+                        <div class="col-sm-9">
+                            <input id="cantidad" name="cantidad" type="text"  class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="precio_tienda" class="col-sm-3 col-form-label">
+                            Precio Tienda
+                        </label>
+                        <div class="col-sm-9">
+                            <input id="precio_tienda" name="precio_tienda" type="text" inputmode="decimal" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="import_fact" class="col-sm-3 col-form-label">
+                            Importe Factura
+                        </label>
+                        <div class="col-sm-9">
+                            <input id="import_fact" name="import_fact" type="text" inputmode="decimal" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Agregar</button>
+                    </div>
+                </div>
+            </form>      
+           {% endif %}
+           {% for producto in productos %}
+            <div class="row pb-2">
+                <form method="post" action="/control/actualizar_producto/{{producto.id}}" >
+                    <h4>{{ producto.articulo }} - {{producto.tipo}}</h4>
+                    <hr>
+                        {% csrf_token %}
+                        <input id="pedido_id" name="pedido_id" type="hidden" value="{{ pedidos.id }}">
+                        <div class="mb-3 row">
+                            <label for="articulo" class="col-sm-3 col-form-label">
+                                Articulo
+                            </label>
+                            <div class="col-sm-9">
+                                <select name="articulo" id="articulo" class="form-control">
+                                    
+                                    {% for articulo in articulos %}
+                                        <option value="{{articulo.id}}">{{articulo.nombre}}</option> 
+                                    {% endfor %}
+                                        
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="nombre" class="col-sm-3 col-form-label">
+                                Tipos de Ventas
+                            </label>
+                            <div class="col-sm-9">
+                                <select name="tipo_id" id="tipo_id" class="form-control">
+                                    
+                                    {% for tipo in tipos %}
+                                        <option value="{{tipo.id}}">{{tipo.tipo}}</option> 
+                                    {% endfor %}
+                                        
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="cantidad" class="col-sm-3 col-form-label">
+                                Cantidad
+                            </label>
+                            <div class="col-sm-9">
+                                <input id="cantidad" name="cantidad" type="text" class="form-control" value="{{producto.cantidad}}" >
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="precio_tienda" class="col-sm-3 col-form-label">
+                                Precio Tienda
+                            </label>
+                            <div class="col-sm-9">
+                                <input id="precio_tienda" name="precio_tienda" type="text" inputmode="decimal" class="form-control" value="{{producto.precio_tienda}}" required>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="import_fact" class="col-sm-3 col-form-label">
+                                Importe Factura
+                            </label>
+                            <div class="col-sm-9">
+                                <input id="import_fact" name="import_fact" type="text" inputmode="decimal" class="form-control" value="{{producto.import_fact}}" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Actualizar</button>
+                        </div>
+                </form>
+            </div>    
+            {% endfor %}
+        </div>  
+    </div> 
+</div>  
+{% endblock %}
