@@ -22,5 +22,6 @@ urlpatterns = [
     path('',views.index, name = 'inicio'),
     re_path('control/',include('control.urls')),
     path('', include('django.contrib.auth.urls')),
-    re_path('authentication/',include('authentication.urls'))
+    re_path('authentication/',include('authentication.urls')),
+    re_path('almacen/',include('almacen.urls'))
 ]

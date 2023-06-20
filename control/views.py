@@ -129,6 +129,11 @@ def detalles_pedidos (request,pk):
         Total_pagarT += producto.total_pagar
         Precio_tiendaT += producto.precio_tienda
         Importe_facturaT += producto.import_fact
+        Importe_tiendaT = round(Importe_tiendaT,2)
+        Descuento_pasarelaT = round(Descuento_pasarelaT,2)
+        Total_pagarT = round(Total_pagarT,2)
+        Importe_facturaT = round(Importe_facturaT,2)
+        Importe_pasarelaT = round(Importe_pasarelaT,2)
     return render(request,'detalles.html',{'productos':productos,'Importe_facturaT':Importe_facturaT,'Importe_tiendaT':Importe_tiendaT,'Descuento_pasarelaT':Descuento_pasarelaT,'Importe_pasarelaT':Importe_pasarelaT,'Total_pagarT':Total_pagarT,'Precio_tiendaT':Precio_tiendaT})
     
 
@@ -160,21 +165,30 @@ def filtrado(request):
     if ('pedido' in request.GET and request.GET ['pedido'] != ''):
         pedidos = pedidos.filter( numero = request.GET ['pedido'])
     if ('codigo' in request.GET and request.GET ['codigo'] !=''):
-        articulo1 = articulo.filter( codigo = request.GET ['codigo'])
-        print(articulo1)
-        producto = producto.filter(articulo_id = articulo1.id)
-        print(producto)
-        pedidos = pedidos.filter(id = producto.pedido_id)
-    if ('fecha' in request.GET and request.GET ['fecha'] !=''):
-        registros = registro.filter( fecha_compra = request.GET ['fecha'])
+        articulo1 = articulo.filter( codigo = request.GET ['codigo']).first()
+        if (articulo1 != None):
+            producto = Producto.objects.filter(articulo_id = articulo1.id).first()
+            pedidos = pedidos.filter(id = producto.pedido_id)
+        else:
+            pedidos = []
+            return render(request,'resultados.html',{ 'pedidos': pedidos })
+    if ('fecha_compra' in request.GET and request.GET ['fecha_compra'] !=''):
+        pedidos = pedidos.filter( fecha_compra = request.GET ['fecha_compra'])
     if ('entrega_fecha' in request.GET and request.GET ['entrega_fecha'] !=''):
-        registros = registro.filter( fecha = request.GET ['entrega_fecha'])
-    if ('parte' in request.GET and request.GET ['parte'] !=''):
-        piezas = pieza.filter( pieza = request.GET ['parte'])
-        pieza = piezas[0]
-        registros = registro.filter( pieza_id = pieza.id)
+        pedidos = pedidos.filter( fecha = request.GET ['entrega_fecha'])
+    if ('productos' in request.GET and request.GET ['productos'] !=''):
+        piezas = articulo.filter( nombre = request.GET ['productos']).first()
+        if (piezas != None ):
+            producto  = producto.filter(articulo_id = piezas.id).first()
+            pedidos = pedidos.filter(id = producto.pedido_id)
+        else :
+            pedidos = []
     if ('venta' in request.GET and request.GET ['venta'] !=''):
-        tipos = tipo.filter(tipo = request.GET ['venta'] )
-        tipo = tipos[0]
-        registros = registro.filter(tipo_id = tipo.id)
+        tipos = tipo.filter(tipo = request.GET ['venta'] ).first()
+        if (tipos != None):
+            producto = producto.filter(tipo_id = tipos.id).first()
+            print(producto)
+            pedidos = pedidos.filter(id = producto.pedido_id)
+        else :
+            pedidos = []
     return render(request,'resultados.html',{ 'pedidos': pedidos }) 

@@ -7,6 +7,16 @@
 {% endblock title %}
 
 {% block content %}
+<div class="container py-4">
+  <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'Control:listado' %}">Listado</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Detalles</li>
+      </ol>
+  </nav>
+  <br>
+</div>
 <h4 style="text-align: center;">Facturación</h4>
 <hr>
 <table class="table table-sm">
@@ -15,6 +25,7 @@
         <th scope="col">Id</th>
         <th scope="col">Código</th>
         <th scope="col">Producto</th>
+        <th scope="col">Tipo de Venta</th>
         <th scope="col">Descuento Pasarela</th>
         <th scope="col">Precio Tienda</th>
         <th scope="col">Importe Pasarela</th>
@@ -29,6 +40,7 @@
         <th scope="row">{{producto.id}}</th>
         <td>{{producto.articulo.codigo}}</td>
         <td>{{producto.articulo}}</td>
+        <td>{{producto.tipo}}</td>
         <td>{{producto.descuento_pasarela}}</td>
         <td>{{producto.precio_tienda}}</td>
         <td>{{producto.importe_pasarela}}</td>

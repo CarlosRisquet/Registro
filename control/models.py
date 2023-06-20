@@ -31,7 +31,7 @@ class Pedido(models.Model):
     recibe = models.CharField(max_length=50)
 
     def __str__(self):
-        return {self.numero}
+        return str(self.numero)
 
     @property
     def producto(self):
@@ -60,7 +60,7 @@ class Producto(models.Model):
         verbose_name_plural = 'Productos' 
 
     def __str__(self):
-        return self.articulo
+        return str(self.id)
 
     
     @property

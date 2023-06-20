@@ -23,7 +23,8 @@
   <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Listado</li>
+          <li class="breadcrumb-item"><a href="{% url 'Control:listado' %}">Listado</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Resultado</li>
       </ol>
   </nav>
   <br>
@@ -50,8 +51,8 @@
                               <input id="codigo" type="text" class="form-control" name="codigo">
                           </div>
                           <div class="col mb-3">
-                              <label for="fecha" class="form-label">Fecha Compra</label>
-                              <input id="fecha" type="date" class="form-control" name="fecha">
+                              <label for="fecha_compra" class="form-label">Fecha Compra</label>
+                              <input id="fecha_compra" type="date" class="form-control" name="fecha_compra">
                           </div>    
                       </div>
                       <div class="row">                         
@@ -60,7 +61,7 @@
                               <input id="entrega_fecha" type="date" class="form-control" name="entrega_fecha">
                           </div>             
                           <div class="col mb-3">
-                            <label for="parte" class="form-label">Partes y pieza</label>
+                            <label for="productos" class="form-label">Productos</label>
                             <input id="parte" type="text" class="form-control" name="parte">
                           </div>
                           <div class="col mb-3">
@@ -113,7 +114,7 @@
           <td>{{pedido.entregado}}</td>
           <td>{{pedido.recibe}}</td>
           <td> <a class="btn btn-secondary" href="{% url 'Control:detalles_pedido' pedido.id%}" role="button">Detalles</a></td>
-          <td> <a class="btn btn-success" href="{% url 'Control:update' pedido.id %}"  role="button">Editar</a></td>
+          <td> <a class="btn btn-success" href="{% url 'Control:update' pedido.id %}"  role="button">Actualizar</a></td>
           <td> <a class="btn btn-danger" href="{% url 'Control:delete' pedido.id %}" role="button">Eliminar</a></td>    
       {% endfor %}
       </tbody>

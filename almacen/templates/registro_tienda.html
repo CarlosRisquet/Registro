@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Registro
+{% endblock title %}
+
+
+{% block content %}
+<div class="container py-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Tienda</li>
+        </ol>
+    </nav>
+    <br>
+</div>
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <form class="card p-5" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h1 style="text-align: center;">Registros Tienda</h1>
+            <hr>
+            <div class="mb-3">
+                <label for='{{ form.nombre.id_for_label }}' class="form-label">Articulo</label>
+                {{form.articulo.nombre}}
+            </div>
+            <div class="mb-3">
+                <label for='{{ form.nombre.id_for_label }}' class="form-label">Cantidad</label>
+                {{form.cantidad}}
+            </div>
+            <div class="col mb-3">
+                <label for="imagen" class="form-label">Imagen</label>
+                <input id="imagen" type="image" class="form-control" name="imagen">
+            </div>  
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">Agregar</button>
+            </div>
+        </form>
+    </div>
+</div>    
+{% endblock content %}

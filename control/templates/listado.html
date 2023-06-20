@@ -50,8 +50,8 @@
                               <input id="codigo" type="text" class="form-control" name="codigo">
                           </div>
                           <div class="col mb-3">
-                              <label for="fecha" class="form-label">Fecha Compra</label>
-                              <input id="fecha" type="date" class="form-control" name="fecha">
+                              <label for="fecha_compra" class="form-label">Fecha Compra</label>
+                              <input id="fecha_compra" type="date" class="form-control" name="fecha_compra">
                           </div>    
                       </div>
                       <div class="row">                         
@@ -60,8 +60,8 @@
                               <input id="entrega_fecha" type="date" class="form-control" name="entrega_fecha">
                           </div>             
                           <div class="col mb-3">
-                            <label for="parte" class="form-label">Partes y pieza</label>
-                            <input id="parte" type="text" class="form-control" name="parte">
+                            <label for="productos" class="form-label">Productos</label>
+                            <input id="productos" type="text" class="form-control" name="productos">
                           </div>
                           <div class="col mb-3">
                             <label for="venta" class="form-label">Tipos de Ventas</label>
@@ -113,7 +113,7 @@
           <td>{{registro.entregado}}</td>
           <td>{{registro.recibe}}</td>
           <td> <a class="btn btn-secondary" href="{% url 'Control:detalles_pedido' registro.id%}" role="button">Detalles</a></td>
-          <td> <a class="btn btn-success" href="{% url 'Control:update' registro.id %}"  role="button">Editar</a></td>
+          <td> <a class="btn btn-success" href="{% url 'Control:update' registro.id %}"  role="button">Actualizar</a></td>
           <td> <a class="btn btn-danger" href="{% url 'Control:delete' registro.id %}" role="button">Eliminar</a></td>    
       {% endfor %}
       </tbody>
