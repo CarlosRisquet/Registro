@@ -23,16 +23,26 @@
             <h1 style="text-align: center;">Registros Tienda</h1>
             <hr>
             <div class="mb-3">
-                <label for='{{ form.nombre.id_for_label }}' class="form-label">Articulo</label>
-                {{form.articulo.nombre}}
-            </div>
-            <div class="mb-3">
-                <label for='{{ form.nombre.id_for_label }}' class="form-label">Cantidad</label>
-                {{form.cantidad}}
+                <label for="articulo" class="col-sm-3 col-form-label">
+                    Articulo
+                </label>
+                <div class="col-sm-9">
+                    <select name="articulo" id="articulo" class="form-control">
+                        
+                        {% for articulo in articulos %}
+                            <option value="{{articulo.id}}">{{articulo.nombre}}</option> 
+                        {% endfor %}
+                            
+                    </select>
+                </div>
             </div>
             <div class="col mb-3">
+                <label for="cantidad" class="form-label">Cantidad</label>
+                <input id="cantidad" type="text" class="form-control" name="cantidad">
+            </div> 
+            <div class="col mb-3">
                 <label for="imagen" class="form-label">Imagen</label>
-                <input id="imagen" type="image" class="form-control" name="imagen">
+                <input id="imagen" type="file" class="form-control" name="imagen">
             </div>  
             <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-primary">Agregar</button>
