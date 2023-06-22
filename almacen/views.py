@@ -16,3 +16,7 @@ def reg_tienda (request):
         )
         almacen.save()
     return render(request,'registro_tienda.html',{'articulos':articulos})
+
+def dispo_almacen(request):
+    almacen = Almacen.objects.all()
+    return render(request,'disponibilidad.html',{'almacen':almacen})

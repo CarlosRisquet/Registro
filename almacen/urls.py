@@ -8,6 +8,7 @@ app_name = 'Almacen'
 urlpatterns = [
     path('inicio/',views.inicio, name = 'inicio_almacen'),
     path('registro_tienda/',views.reg_tienda, name = 'registro_tienda'),
+    path('disponibilidad/',views.dispo_almacen, name='disponibilidad'),
 ]
 
 urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
