@@ -6,7 +6,7 @@ class Almacen (models.Model):
     id = models.BigAutoField(primary_key=True)
     articulo  = models.ForeignKey(Articulo, on_delete=models.CASCADE)
     cantidad = models.IntegerField()
-    imagen = models.ImageField(upload_to='productos', height_field=None, width_field=None, max_length=None)
+    imagen = models.ImageField(upload_to=f'static/images/', default='imagen')
 
     class Meta:
         verbose_name = 'Almacen'

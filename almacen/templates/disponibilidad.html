@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Almacén
+{% endblock title %}
+
+{% block content %}
+<div class="container py-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'Almacen:inicio_almacen' %}">Almacén</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Disponibilidad</li>
+        </ol>
+    </nav>
+    <br>
+</div>
+<div class="row pb-4">
+    {% for producto in almacen %}
+    <div class="col-md-4">
+        <div class="card py-3 text-center">
+            <img src="{{producto.imagen.url}}">
+            <h3>{{producto.articulo}}</h3>
+            <h3>Existencia en Almacen: {{producto.cantidad}}</h3>
+            <form action="/almacen/actualizar/{{producto.id}}" method="post" value:>
+            {% csrf_token %}
+            <div class="mb-3 row">
+                <label for="import_fact" class="col-sm-3 col-form-label">
+                    Cantidad
+                </label>
+                <div class="col-sm-6">
+                    <input id="cantidad" name="cantidad" type="text" class="form-control" width="100">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Actualizar</button>   
+            </form>
+        </div>
+    </div>     
+    {% endfor %}  
+</div>   
+{% endblock content %}

@@ -11,7 +11,8 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Tienda</li>
+            <li class="breadcrumb-item"><a href="{% url 'Almacen:inicio_almacen' %}">Almacén</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Registro Almacén</li>
         </ol>
     </nav>
     <br>
@@ -20,13 +21,13 @@
     <div class="col-md-6 offset-md-3">
         <form class="card p-5" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <h1 style="text-align: center;">Registros Tienda</h1>
+            <h1 style="text-align: center;">Registros Almacén</h1>
             <hr>
             <div class="mb-3">
                 <label for="articulo" class="col-sm-3 col-form-label">
                     Articulo
                 </label>
-                <div class="col-sm-9">
+                <div class="col-mb-3">
                     <select name="articulo" id="articulo" class="form-control">
                         
                         {% for articulo in articulos %}

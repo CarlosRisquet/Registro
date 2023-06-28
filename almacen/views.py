@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import Almacen
 from control.models import Articulo
 
@@ -20,3 +20,12 @@ def reg_tienda (request):
 def dispo_almacen(request):
     almacen = Almacen.objects.all()
     return render(request,'disponibilidad.html',{'almacen':almacen})
+
+def actualizar(request,pk):
+    almacen = Almacen.objects.all()
+    almacen1 = Almacen.objects.get(id = pk)
+    if request.method == 'POST':
+        almacen1.cantidad = int(request.POST['cantidad'])
+        almacen1.save()
+    return render(request,'disponibilidad.html',{'almacen':almacen})
+
