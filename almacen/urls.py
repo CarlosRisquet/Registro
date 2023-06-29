@@ -9,5 +9,7 @@ urlpatterns = [
     path('inicio/',views.inicio, name = 'inicio_almacen'),
     path('registro_tienda/',views.reg_tienda, name = 'registro_tienda'),
     path('disponibilidad/',views.dispo_almacen, name='disponibilidad'),
-    path('actualizar/<pk>',views.actualizar, name = 'actualizar')
+    path('actualizar/<pk>',views.actualizar, name = 'actualizar'),
+    path('admin/',views.admin, name = 'administrador'),
+    path('delete/<pk>',views.AlmacenDeleteView.as_view(),name = 'delete')
 ]

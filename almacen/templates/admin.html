@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+
+{% block tittle %}Adminitración{% endblock tittle %}
+
+{% block content %}
+<div class="container py-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Listado</li>
+        </ol>
+    </nav>
+    <br>
+  
+    <div class="row">
+        <div class="col">
+            <h1>Administración</h1>
+            <hr>
+        </div>
+    </div>
+    <br>
+    <table class="table table-sm">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Imagen</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for articulo in almacen %}
+        <tr>
+            <th scope="row">{{articulo.id}}</th>
+            <td>{{articulo.cantidad}}</td>
+            <td>{{articulo.articulo}}</td>
+            <td>{{articulo.imagen}}</td>
+            <td> <a class="btn btn-success" href="#"  role="button">Actualizar</a></td>
+            <td> <a class="btn btn-danger" href="{% url 'Almacen:delete' articulo.id %}" role="button">Eliminar</a></td>    
+        {% endfor %}
+        </tbody>
+    </table>
+</div>              
+{% endblock content %}

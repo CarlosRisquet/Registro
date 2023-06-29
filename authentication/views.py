@@ -19,4 +19,3 @@ def unauthorized(request):
 def salir(request):
     logout(request)
     return redirect("login")
-

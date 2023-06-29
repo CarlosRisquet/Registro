@@ -20,7 +20,7 @@
 <div class="row pb-4">
     {% for producto in almacen %}
     <div class="col-md-4">
-        <div class="card py-3 text-center">
+        <div class="card py-3 text-center" style="margin-top: 15px;">
             <img src="{{producto.imagen.url}}">
             <h3>{{producto.articulo}}</h3>
             <h3>Existencia en Almacen: {{producto.cantidad}}</h3>
